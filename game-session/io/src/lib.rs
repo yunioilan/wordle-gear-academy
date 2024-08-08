@@ -170,4 +170,3 @@ impl Metadata for GameSessionMetadata {
     type Signal = ();
     type State = Out<GameSessionState>;
 }
-
