@@ -1,4 +1,5 @@
 #![no_std]
+
 use gstd::{collections::HashMap, exec, msg, prelude::*, ActorId};
 use wordle_io::*;
 
@@ -22,7 +23,7 @@ extern "C" fn init() {
 
 #[no_mangle]
 extern "C" fn handle() {
-    let action: Action = msg::load().expect("Unable to decode ");
+    let action: Action = msg::load().expect("Unable to decode action");
     let wordle = unsafe { WORDLE.as_mut().expect("The program is not initialized") };
 
     let reply = match action {
@@ -34,7 +35,7 @@ extern "C" fn handle() {
         }
         Action::CheckWord { user, word } => {
             if word.len() != 5 {
-                panic!("The length of the word exceeds 5");
+                panic!("The length of the word must be 5 characters");
             }
             let key_word = wordle
                 .games
